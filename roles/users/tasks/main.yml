@@ -1,0 +1,26 @@
+# tasks file for users
+---
+  - name: Create Group
+    group:
+      name: "{{ super_group }}"
+      state: present
+  - name: Create User
+    ansible.builtin.user:
+      name: "{{ username }}"
+      state: present
+      shell: /bin/bash
+      password: "{{ userpass | password_hash('sha512') }}"
+      update_password: on_create
+      groups: "{{ super_group }}"
+      append: yes
+  - name: Deploy SSH Public Key
+    ansible.posix.authorized_key:
+      user: "{{ username }}"
+      state: present
+      key: "{{ lookup('file', '/home/{{ ansible_user_id }}/.ssh/id_rsa.pub') }}"
+  - name: Allow supergroup users to sudo without a password
+    lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: "^supergroup"
+      line: "%supergroup ALL=(ALL) NOPASSWD: ALL"

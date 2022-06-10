@@ -1,0 +1,25 @@
+---
+# tasks file for php
+- name: Install PHP-FPM
+  apt:
+    name: php-fpm
+    update_cache: yes
+    state: latest
+  with_items:
+     - php
+     - php-mysql
+     - php-PHPMailer
+     - php-curl
+     - php-common
+- name: Start PHP-FPM
+  service:
+    name: php8.1-fpm
+    state: restarted
+- name: copy php-fpm config file
+  copy:
+    src: /etc/ansible/files/www.conf
+    dest: /etc/php/8.1/fpm/pool.d
+- name: restart php-fpm
+  service:
+    name: php8.1-fpm
+    state: restarted

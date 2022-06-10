@@ -1,0 +1,9 @@
+#5 task
+---
+- hosts: test
+  gather_facts: no
+  become: yes
+  roles:
+    - users
+    - http
+    - php

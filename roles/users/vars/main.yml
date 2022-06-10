@@ -1,0 +1,6 @@
+---
+# vars file for users
+username: user1
+userpass: user_password
+super_group: usergroup
+ansible_user_id: hunna
