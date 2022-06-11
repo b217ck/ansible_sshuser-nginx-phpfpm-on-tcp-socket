@@ -1,0 +1,8 @@
+#6_2 task
+---
+- hosts: server2
+  gather_facts: no
+  become: yes
+  roles:
+    - users
+    - php

@@ -1,0 +1,13 @@
+[test]
+localhost
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_user=ansible
+vault_password_file=/etc/ansible/.vault_pass.txt
+
+[server1]
+localhost
+
+[server2]
+localhost
