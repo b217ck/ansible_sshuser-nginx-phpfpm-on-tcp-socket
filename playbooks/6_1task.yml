@@ -1,0 +1,12 @@
+#6_1 task
+---
+- hosts: test
+  gather_facts: no
+  become: yes
+  vars:
+    server_name: "{{ ansible_default_ipv4.address }}"
+    document_root: /var/www/html
+    app_root: /home/hunna/ansible-nginx-demo/html_demo_site-main
+  roles:
+    - users
+    - http
